@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @post = Post.all
+     @posts = Post.all
   end
   
   def new
@@ -9,16 +9,22 @@ class PostsController < ApplicationController
   
   def create
     @post = Post.new(post_params)
-    @post.save
-    redirect_to post_path(@post)
+    if @post.save
+      flash[:success] = "YES, it worked!"
+      redirect_to post_path(@post)
+    else 
+      flash[:error] = "BOO, it failed!"
+      redirect_to new_post_path
+    end  
   end
 
   private 
 
-    def show
+  def show
     @post = Post.find(params[:id])
   end
  
+  
   private
   
   def post_params
@@ -26,6 +32,7 @@ class PostsController < ApplicationController
   end
 
 end
+
 
 
 

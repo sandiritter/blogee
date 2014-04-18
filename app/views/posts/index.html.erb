@@ -1,8 +1,12 @@
  <%= link_to "New Post", new_post_path %>
-
-<% @post.each do |post| %>
-    <%= link_to "My Post", post_path(@post) %>
+ 
+<% @posts.each do |post| %>
+    <%= link_to "My Post", post_path(post) %>
  <% end %>
 
 
+
   
+
+
+      

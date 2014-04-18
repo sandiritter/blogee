@@ -37,4 +37,5 @@ feature 'Creating posts' do
     # assert that we are getting the error flash
     expect(page).to have_css('.alert.alert-error')
   end
-end
+end  
+  

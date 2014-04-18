@@ -3,10 +3,10 @@ require 'spec_helper'
 feature 'Viewing a post spec' do
   # uncomment the following line when running this feature
 
-  # let!(:post) { create(:post) }
+   let!(:post) { create(:post) }
 
   scenario do
-    pending "Please complete creating_posts_spec.rb"
+    #pending "Please complete creating_posts_spec.rb"
     visit posts_path
     click_link post.title
     expect(current_path).to eq post_path(post)

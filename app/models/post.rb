@@ -1,2 +1,4 @@
 class Post < ActiveRecord::Base
-end
+  validates :author, :content, :title, :presence => true
+ end
+            
