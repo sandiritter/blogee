@@ -1,3 +1,21 @@
+<p>
+ <b>Title:</b>
+ <%= @post.title %>
+</p>
+<p>
+ <b>Author:</b>
+ <%= @post.author %>
+</p>
+<p>
+ <b>Content:</b>
+ <%= @post.content %>
+</p>
+
+<% provide(:title, @post.title) %>
+
+
+<%= link_to 'Back', posts_path %>
+<%= link_to 'Edit Post', edit_post_path(@post) %>
 
 
     

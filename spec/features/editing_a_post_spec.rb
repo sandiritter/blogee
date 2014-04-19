@@ -2,10 +2,10 @@ require 'spec_helper'
 
 feature 'Editing a post' do
   # uncomment this line when running this spec
-  # let!(:post) { create(:post) }
+   let!(:post) { create(:post) }
 
   scenario 'with valid attributes' do
-    pending 'Please complete viewing_a_post_spec.rb first'
+    #pending 'Please complete viewing_a_post_spec.rb first'
     visit post_path(post)
     click_link 'Edit Post'
     expect(current_path).to eq edit_post_path(post)
@@ -37,3 +37,4 @@ feature 'Editing a post' do
     expect(page).to have_css('.alert.alert-error')
   end
 end
+
