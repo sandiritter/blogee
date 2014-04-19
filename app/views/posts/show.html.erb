@@ -1,15 +1,16 @@
-<p>
- <b>Title:</b>
- <%= @post.title %>
-</p>
-<p>
- <b>Author:</b>
- <%= @post.author %>
-</p>
-<p>
- <b>Content:</b>
- <%= @post.content %>
-</p>
+<div id="title">
+  <%= @post.title %>
+</div>
+
+<div id="author">
+  <%= @post.author %>
+</div>
+  
+<div id="content">
+  <%= @post.content %>
+</div>
+  
+
 
 <% provide(:title, @post.title) %>
 

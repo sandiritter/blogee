@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  
   def index
      @posts = Post.all
   end
@@ -29,7 +30,8 @@ class PostsController < ApplicationController
       flash[:success] = "YES, it worked!"
       redirect_to post_path(@post)
     else 
-   #   redirect_to new_post_path
+      flash[:success] = "BOO, it failed!"
+      redirect_to edit_post_path(@post)
     end
   end
   
