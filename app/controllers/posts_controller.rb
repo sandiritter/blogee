@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :find_post, except: [:index, :new, :create
+                                    ]
   def index
     @posts = Post.all
   end
@@ -17,12 +19,7 @@ class PostsController < ApplicationController
     end
   end
 
-  def edit
-    @post = Post.find(params[:id])
-  end
-
   def update
-    @post = Post.find(params[:id])
     if @post.update(post_params)
       redirect_to post_path(@post)
     else
@@ -31,17 +28,17 @@ class PostsController < ApplicationController
     end
   end
 
-  def show
-    @post = Post.find(params[:id])
-  end
-
   def destroy
-    @post = Post.find(params[:id]).destroy
+    @post.destroy
     flash[:success] = "Post deleted."
     redirect_to posts_path
   end
 
   private
+
+  def find_post
+    @post = Post.find(params[:id])
+  end
 
   def post_params
     params.require(:post).permit(:title, :content, :author)
