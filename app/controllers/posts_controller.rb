@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
-  before_action :find_post, except: [:index, :new, :create
-                                    ]
+  before_action :find_post, except: [:index, :new, :create]
   def index
     @posts = Post.all
   end
@@ -26,7 +25,7 @@ class PostsController < ApplicationController
       flash[:success] = "YES, it worked!"
       redirect_to post_path(@post)
     else 
-      flash[:success] = "BOO, it failed!"
+      flash[:error] = "BOO, it failed!"
       redirect_to edit_post_path(@post)
     end
   end
