@@ -11,12 +11,11 @@ class CommentsController < ApplicationController
   end
   
   def create
-    @comment = Comment.new(comment_params)
+    @comment = @post.comments.build(comment_params)
     if @comment.save
       flash[:success] = "Comment has been saved."
-      #redirect_to post_path(@post)
-      redirect_to [@post, @comment]
-
+      redirect_to post_path(@post)
+      #redirect_to [@post, @comment]
     else 
       flash[:error] = "Comment has not been saved."
       #redirect_to post_comment_path(@comment)
