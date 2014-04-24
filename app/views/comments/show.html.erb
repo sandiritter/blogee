@@ -1,0 +1,7 @@
+<div id='comment'>
+ <h2><%= @comment.title %></h2>
+ <%= simple_format(@comment.description) %>
+</div>
+
+
+<%= link_to "Edit Comment", [:edit, @post, @comment] %>

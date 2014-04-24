@@ -1,14 +1,4 @@
 <%= form_for [@post, @comment] do |f| %>
-
-<div class="form-group">
-  <%= f.label :content %>
-  <%= f.text_area :content, rows: 20, class: "form-control" %>
-</div>
-<div class="form-group">
-  <%= f.label :author %>
-  <%= f.text_field :author, class: "form-control" %>
-</div>
-<%= f.submit "Add Comment", class: "btn btn-default" %>
 <% if @comment.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -19,6 +9,17 @@
     </ul>
   </div>
 <% end %>
+
+
+<div class="form-group">
+  <%= f.label :content %>
+  <%= f.text_area :content, rows: 20, class: "form-control" %>
+</div>
+<div class="form-group">
+  <%= f.label :author %>
+  <%= f.text_field :author, class: "form-control" %>
+</div>
+<%= f.submit "Add Comment", class: "btn btn-default" %>
 
 
 
