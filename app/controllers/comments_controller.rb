@@ -14,8 +14,8 @@ class CommentsController < ApplicationController
     @comment = @post.comments.build(comment_params)
     if @comment.save
       flash[:success] = "Comment has been saved."
-      redirect_to post_path(@post)
-      #redirect_to [@post, @comment]
+      #redirect_to post_path(@post)
+      redirect_to [@post, @comment]
     else 
       flash[:error] = "Comment has not been saved."
       #redirect_to post_comment_path(@comment)
@@ -26,8 +26,24 @@ class CommentsController < ApplicationController
   def show
   end
   
+  def update
+    if @comment.update(comment_params)
+      flash[:notice] = "Comment has been updated."
+      redirect_to [@post, @comment]
+   else
+      flash[:alert] = "Comment has not been updated."
+      render action: "edit"
+   end
+  end
+  
+  def destroy
+    @comment.destroy
+    flash[:notice] = "Comment has been deleted."
+    redirect_to @post
+  end
+
   def edit
-    @comment = Comment.find(params[:id])
+   # @comment = Comment.find(params[:id])
    # edit_post_comment_path(@post, @comment)
   end
   
@@ -46,11 +62,11 @@ class CommentsController < ApplicationController
  
   def set_post
      @post = Post.find(params[:post_id])
- end
+  end
 
   def set_comment
     @comment = @post.comments.find(params[:id])
-end
+  end
 
 
 end
