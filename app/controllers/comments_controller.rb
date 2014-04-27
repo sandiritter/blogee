@@ -2,9 +2,7 @@ class CommentsController < ApplicationController
   before_action :set_post
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
-  def index
-    @comments = Comment.new
-  end
+  
     
   def new
     @comment = @post.comments.build
@@ -14,13 +12,17 @@ class CommentsController < ApplicationController
     @comment = @post.comments.build(comment_params)
     if @comment.save
       flash[:success] = "Comment has been saved."
-      #redirect_to post_path(@post)
-      redirect_to [@post, @comment]
+      redirect_to post_path(@post)
+      #redirect_to [@post, @comment]
     else 
       flash[:error] = "Comment has not been saved."
-      #redirect_to post_comment_path(@comment)
-      render "new"
+      redirect_to edit_post_path(@post)
+     # render "new"
     end  
+  end
+  
+  def index
+    @comments = Comment.new
   end
   
   def show

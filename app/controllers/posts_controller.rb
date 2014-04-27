@@ -1,15 +1,24 @@
 class PostsController < ApplicationController
   before_action :find_post, except: [:index, :new, :create]
+  before_action :check_authentication, except: [:index, :show ]
+  
   def index
     @posts = Post.all
   end
 
   def new
-    @post = Post.new
+    if @user.nil?
+      flash[:error] = "You must login"
+      session[:redirect] = request.fullpath
+      redirect_to login_path
+    else  
+      @post = Post.new
+    end
   end
 
   def create
     @post = Post.new(post_params)
+    @post.author = @user.username
     if @post.save
       flash[:success] = "YES, it worked!"
       redirect_to post_path(@post)
@@ -43,9 +52,13 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :author)
+    params.require(:post).permit(:title, :content)
   end
 
+  def check_authentication
+    @user = User.where(username: session[:username]).first unless session[:username].nil?
+  end
+  
 end
 
 

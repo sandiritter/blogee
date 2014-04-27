@@ -1,5 +1,24 @@
 require 'spec_helper'
 
+feature 'new post only available to logged in users' do
+  let!(:user) {create :user}
+  before do
+    visit new_post_path
+  end
+  
+  scenario 'logged in' do
+    fill_in "Username", with: user.username
+    fill_in "Password", with: user.password
+    click_button "Login"
+    expect(current_path).to eq(new_post_path)
+  end
+
+  scenario 'unauthenticated' do
+    expect(current_path).to eq(login_path)
+    expect(page).to have_content("You must login")
+  end
+end
+
 feature 'Creating posts' do
   scenario 'with valid attributes' do
     # visit the posts path in the browser
@@ -11,7 +30,7 @@ feature 'Creating posts' do
     # find the text field called Content and fill it in with the text
     fill_in 'Content', with: 'Lorem ipsum dolor sit amet.'
     # find the text field called Author and fill it in with the text
-    fill_in 'Author', with: 'Randy Savage'
+
     # find the button called Save and click it
     click_button 'Save'
     # Assert that there is now 1 post stored in the database
@@ -34,7 +53,7 @@ feature 'Creating posts' do
     # assert that we are still on the form
     expect(current_path).to eq new_post_path
     # assert that we are getting the error flash
-    expect(page).to have_css('.alert.alert-error')
+    expect(page).to have_css('.alert.alert-danger')
   end
 end  
   
