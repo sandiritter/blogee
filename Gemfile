@@ -10,6 +10,8 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'bootstrap-sass'
 gem 'bcrypt', '~> 3.1.7'
+gem 'turbolinks'
+gem 'carrierwave'
 
 group :development, :test do
   gem 'spring'

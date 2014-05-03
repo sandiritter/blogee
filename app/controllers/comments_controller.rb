@@ -16,8 +16,8 @@ class CommentsController < ApplicationController
       #redirect_to [@post, @comment]
     else 
       flash[:error] = "Comment has not been saved."
-      redirect_to edit_post_path(@post)
-     # render "new"
+      #redirect_to edit_post_path(@post)
+      render "new"
     end  
   end
   
@@ -34,7 +34,8 @@ class CommentsController < ApplicationController
       redirect_to [@post, @comment]
    else
       flash[:alert] = "Comment has not been updated."
-      render action: "edit"
+      # render action: "edit"
+      redirect_to edit_post_path(@post)
    end
   end
   

@@ -1,7 +1,14 @@
+<h1>Please sign in</h1>
 <%= form_for :session do |f| %>
+<p> 
   <%= f.label :username %>
   <%= f.text_field :username %>
+</p>
+<p>
   <%= f.label :password %>
   <%= f.password_field :password %>
+</p>
+<p>
   <%= f.submit "Login" %>
+</p>
 <% end %>

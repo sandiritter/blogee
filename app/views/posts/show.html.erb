@@ -4,8 +4,6 @@
       <h1><%= @post.title %></h1>
       <%= link_to "Edit Post", edit_post_path(@post) %>
       <%= link_to "Delete Post", @post, method: :delete %>
-      <%= link_to "Add Comment", new_post_comment_path(@post) %>
-      
     </div>
     <div id="author">
       <p>By: <%= @post.author %></p>
@@ -14,15 +12,28 @@
     <div id="content">
       <p><%= @post.content %></p>
     </div>
+    
+    <% if @post.asset.present? %>
+       <h3>Attached File</h3>
+       <div id="asset">
+         <p> <%= link_to File.basename(@post.asset.path), @post.asset.url %> </p>
+         <p><small><%= number_to_human_size(@post.asset.size) %> </small></p>
+       </div>
+    <% end %>
+    
+    <br>
+    <u> Comments </u>
+    <div id="comments">
+      <% @post.comments.each do |comment| %>
+           <p><%= link_to comment.author, post_comment_path(@post, comment) %> says <%= comment.content %></p>
+      <% end %>
+    </div>
+    
+    <p><%= link_to "Add Comment", new_post_comment_path(@post) %></p>
+    <br>
+    <br>
+    <p><%= link_to "Return to Posts", posts_path %></p>
+    </div>
   </div>
-</div>
+
   
-<h2>Comments</h2>
-<ul id='comment'>
- <% @post.comments.each do |comment| %>
- <li>
- #<%= comment.id %> -
- <%= link_to comment.author, [@post, comment] %>
- </li>
- <% end %>
-</ul>
