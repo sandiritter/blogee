@@ -20,7 +20,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.author = @user.username
     if @post.save
-      flash[:success] = "YES, it worked!"
+      flash[:success] = "YES, it created!"
       redirect_to post_path(@post)
     else 
       flash[:error] = "BOO, it failed!"
@@ -31,6 +31,17 @@ class PostsController < ApplicationController
   def update
      @post = Post.find(params[:id])
     if @post.update(post_params)
+      flash[:success] = "YES, it updated!"
+      redirect_to post_path(@post)
+    else 
+      flash[:error] = "BOO, it failed!"
+      redirect_to edit_post_path(@post)
+    end
+  end
+  
+  def draft
+    @post = Post.find(params[:id]) or  Post.new(post_params)
+    if @post.update(post_params.merge(published: false))
       flash[:success] = "YES, it worked!"
       redirect_to post_path(@post)
     else 
@@ -52,7 +63,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :asset)
+    params.require(:post).permit(:title, :content, :asset, :published)
   end
 
   def check_authentication

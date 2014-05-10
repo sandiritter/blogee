@@ -23,7 +23,7 @@
     
     <br>
     <u> Comments </u>
-    <div id="comments">
+    <div id="comment" class="comments">
       <% @post.comments.each do |comment| %>
            <p><%= link_to comment.author, post_comment_path(@post, comment) %> says <%= comment.content %></p>
       <% end %>

@@ -21,12 +21,19 @@ class CommentsController < ApplicationController
     end  
   end
   
+   
+  def show
+  end
+  
+   def edit
+   # @comment = Comment.find(params[:id])
+   # edit_post_comment_path(@post, @comment)
+  end
+  
   def index
     @comments = Comment.new
   end
-  
-  def show
-  end
+ 
   
   def update
     if @comment.update(comment_params)
@@ -45,10 +52,7 @@ class CommentsController < ApplicationController
     redirect_to @post
   end
 
-  def edit
-   # @comment = Comment.find(params[:id])
-   # edit_post_comment_path(@post, @comment)
-  end
+ 
   
   
   

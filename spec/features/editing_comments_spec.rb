@@ -3,7 +3,8 @@ require 'spec_helper'
 feature "Editing comments" do
   let!(:post) { FactoryGirl.create(:post) }
   let!(:comment) { FactoryGirl.create(:comment, post: post) }
-
+  let!(:user) { create(:user) }
+  
   before do
     visit posts_path
     click_link post.title
@@ -12,8 +13,9 @@ feature "Editing comments" do
   end
 
   scenario "with valid attributes" do
-    fill_in "Author", with: "Bugs Bunny"
     fill_in "Content", with: "That's all folks!"
+    #fill_in "Author", with: "Bugs Bunny"
+    fill_in "Author", with: user.username
     click_button "Update Comment"
 
     expect(page).to have_content "Comment has been updated."
