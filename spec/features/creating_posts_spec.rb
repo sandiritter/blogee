@@ -94,5 +94,25 @@ feature 'Creating posts' do
     end 
   end
   
+  scenario "Creating a post with tags" do
+  visit posts_path
+  click_link 'New Post'
+
+  fill_in "Username", with: user.username
+  fill_in "Password", with: user.password
+  click_button "Login"
+  
+
+  fill_in 'Title', with: 'My First Post'
+  fill_in 'Content', with: 'Lorem ipsum dolor sit amet.'
+    fill_in "Tag names", with: "browser visual"
+  click_button "Save"
+
+    within("#tag_names") do
+    expect(page).to have_content("browser")
+    expect(page).to have_content("visual")
+  end
+end
+  
 end  
   

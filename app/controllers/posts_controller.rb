@@ -63,7 +63,22 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :asset, :published)
+   # params.require(:post).permit(:title, :content, :asset, :published)
+     if params[:commit] == 'Save'
+        params.require(:post).permit(:title,
+                                     :content,
+                                     :author,
+                                     :asset,
+                                     :tag_names,
+                                     :published).merge(published: true)
+     else
+        params.require(:post).permit(:title,
+                                     :content,
+                                     :author,
+                                     :asset,
+                                     :tag_names,
+                                     :published).merge(published: false)
+      end
   end
 
   def check_authentication

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments
     post :draft, on: :member
+    
   end
   
   root  "posts#index"

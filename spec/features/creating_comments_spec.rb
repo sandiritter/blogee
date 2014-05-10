@@ -2,6 +2,7 @@ require 'spec_helper'
 
 feature "Creating Comments" do
   before do
+    ActionMailer::Base.deliveries.clear 
     @post = FactoryGirl.create(:post)
     visit post_path(@post)
     click_link "Add Comment"
@@ -27,4 +28,9 @@ feature "Creating Comments" do
     expect(page).to have_content("Comment has not been saved.")
     expect(page).to have_content("Author can't be blank")
     expect(page).to have_content("Content can't be blank")
-  end end
+  end 
+  
+  
+  
+  
+end

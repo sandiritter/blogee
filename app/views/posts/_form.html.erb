@@ -11,8 +11,13 @@
  <%= f.label :asset, "File" %><br>
  <%= f.file_field :asset %>
 </div>
+<div>
+  <%= f.label :tag_names %><br>
+  <%= f.text_area :tag_names  %>
+</div>
 
 
 <br>
-<%= f.submit "Save as Draft", class: "btn btn-default" %>
+<%= f.submit "Save", class: "btn btn-default" %>
+<%= f.submit "Save as Draft", class: "btn btn-danger" %>
 <% end %>
